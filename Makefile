@@ -43,14 +43,8 @@ $(NAME): $(OBJS)
 clean:
 	@echo "$(YELLOW)Cleaning...$(RESET)"
 	@sleep 1
-	@echo "$(RED)Removing object files...$(RESET)"
-	@sleep 0.1
 	@$(RM) $(OBJS)
-	@echo "$(RED)Removing object directory...$(RESET)"
-	@sleep 0.1
 	@$(RM_DIR) $(OBJ_DIR)
-	@echo "$(RED)Cleaning Libft...$(RESET)"
-	@sleep 0.1
 	@$(MAKE) -C $(LIB_DIR) clean --no-print-directory
 	@echo "$(GREEN)clean done!$(RESET)"
 
