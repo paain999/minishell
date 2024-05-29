@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:01:11 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 19:01:07 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:06:14 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 #include <readline/history.h>
 #include "../Libft/libft.h"
 
-#define RST   "\033[0m"       // Restablecer el color
-#define RED    "\033[0;31m"    // Rojo
-#define GREEN   "\033[0;32m"    // Verde
-#define YLW "\033[0;33m"   // Amarillo
-#define BLUE    "\033[0;34m"    // Azul
-#define PURPLE "\033[0;35m"    // Púrpura
-#define CYAN    "\033[0;36m"    // Cian
-#define WHITE  "\033[0;37m"    // Blanco
+#define RST   "\033[0m"
+#define RED    "\033[0;31m"
+#define GREEN   "\033[0;32m"
+#define YLW "\033[0;33m"
+#define BLUE    "\033[0;34m"
+#define PURPLE "\033[0;35m"
+#define CYAN    "\033[0;36m"
+#define WHITE  "\033[0;37m"
 
 typedef struct s_minishell
 {

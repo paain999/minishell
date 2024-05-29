@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.c                                     :+:      :+:    :+:   */
+/*   ft_cpydarr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 15:23:18 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:50:28 by dajimene         ###   ########.fr       */
+/*   Created: 2024/05/29 23:46:47 by dajimene          #+#    #+#             */
+/*   Updated: 2024/05/29 23:48:19 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-void 	ft_error_exit(char *msg)
+char	**ft_cpdarr(char **arr)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	exit(1);
+	char	**cpy;
+	int		len;
+
+	len = -1;
+	while (arr[++len])
+		;
+	cpy = malloc(sizeof(char *) * (len + 1));
+	if (!cpy)
+		return (NULL);
+	len = -1;
+	while (arr[++len])
+		cpy[len] = ft_strdup(arr[len]);
+	cpy[len] = (void*)0;
+	return (cpy);
 }

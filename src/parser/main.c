@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:56:21 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 19:43:31 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:50:43 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_shell(t_minishell *minishell, char **envp)
 	minishell->cmd_args = NULL;
 	minishell->fd_in = 0;
 	minishell->fd_out = 1;
-	minishell->envp_cpy = ft_cpy_arr(envp);
+	minishell->envp_cpy = ft_cpdarr(envp);
 	if (!minishell->envp_cpy)
 		ft_error_exit("Malloc failed");
 	minishell->paths = get_paths(envp);
@@ -59,22 +59,14 @@ void	init_shell(t_minishell *minishell, char **envp)
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*minishell;
-	int			i;
 
 	(void)av;
 	minishell = NULL;
-	printf("argc: %d\n", ac);
 	if (!envp || !*envp)
 		ft_error_exit("No environment");
 	if (ac > 1)
 		ft_error_exit("No arguments allowed");
 	minishell = malloc(sizeof(t_minishell));
 	init_shell(minishell, envp);
-	i = -1;
-	while (minishell->envp_cpy[++i])
-		printf(CYAN"envp_cpy[%d]: %s\n"RST, i, minishell->envp_cpy[i]);
-	i = -1;
-	while (minishell->paths[++i])
-		printf(YLW"paths[%d]: %s\n"RST, i, minishell->paths[i]);
 	return (0);
 }

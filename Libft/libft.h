@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:02:58 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:25:50 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:48:40 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
+// ARRAY MANIPULATION
+
+char	**ft_cpdarr(char **arr);
 #endif
