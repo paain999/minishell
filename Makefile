@@ -1,7 +1,7 @@
 NAME := minishell
 INCLUDE := -I includes
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 
 RM = rm -f
 RM_DIR = rm -rf
@@ -26,7 +26,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJS)
 	@echo "Compiling Libft..."
-	$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(LIB_DIR)
 	@echo "Compiling minishell..."
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LDFLAGS) -lreadline -o $(NAME)
 

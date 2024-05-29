@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:01:11 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/28 18:21:23 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:01:07 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define RST   "\033[0m"       // Restablecer el color
 #define RED    "\033[0;31m"    // Rojo
 #define GREEN   "\033[0;32m"    // Verde
-#define YLL0W "\033[0;33m"   // Amarillo
+#define YLW "\033[0;33m"   // Amarillo
 #define BLUE    "\033[0;34m"    // Azul
 #define PURPLE "\033[0;35m"    // Púrpura
 #define CYAN    "\033[0;36m"    // Cian
@@ -34,8 +34,11 @@ typedef struct s_minishell
 	char	*cmd_args;
 	int		fd_in;
 	int		fd_out;
-	char	**env;
+	char	**envp_cpy;
 	char	**paths;
 }	t_minishell;
+
+void	ft_error_exit(char *msg);
+char	**ft_cpy_arr(char **arr);
 
 #endif
