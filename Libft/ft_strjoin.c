@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:24:46 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 15:19:20 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:46:40 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (i <= newlen && s2[j] != '\0')
 		result[i++] = s2[j++];
 	result[i] = '\0';
-	free((char *)s1);
 	return (result);
 }
 /* int main()

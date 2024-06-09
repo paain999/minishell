@@ -6,13 +6,13 @@
 /*   By: dajimene <dajimene@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:10:30 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:19:03 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:38:58 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*clean_stash(char *stash)
+static char	*clean_stash(char *stash)
 {
 	int		i;
 	int		j;
@@ -41,7 +41,7 @@ char	*clean_stash(char *stash)
 	return (cleanned);
 }
 
-char	*create_line(char *stash)
+static char	*create_line(char *stash)
 {
 	char	*str;
 	int		i;
@@ -66,11 +66,11 @@ char	*create_line(char *stash)
 	return (str);
 }
 
-char	*add_to_stash(int fd, char *stash)
+static char	*add_to_stash(int fd, char *stash)
 {
 	char	*buff;
 	int		readed;
-	
+
 	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
@@ -78,7 +78,7 @@ char	*add_to_stash(int fd, char *stash)
 	while (!ft_strchr(stash, '\n') && readed != 0)
 	{
 		readed = (int)read(fd, buff, BUFFER_SIZE);
-		if((!stash && readed <= 0) || readed == -1)
+		if ((!stash && readed <= 0) || readed == -1)
 		{
 			free(buff);
 			free(stash);
@@ -92,15 +92,15 @@ char	*add_to_stash(int fd, char *stash)
 	}
 	free(buff);
 	buff = NULL;
-	return(stash);
+	return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char		*stash[1024];
-	char			*line;
-	
-	if(fd < 0 || BUFFER_SIZE <= 0)
+	static char	*stash[1024];
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	stash[fd] = add_to_stash(fd, stash[fd]);
@@ -108,12 +108,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = create_line(stash[fd]);
 	stash[fd] = clean_stash(stash[fd]);
-	if(!ft_strlen(line))
+	if (!ft_strlen(line))
 	{
 		free(stash[fd]);
 		free(line);
 		line = NULL;
 		stash[fd] = NULL;
 	}
-	return(line);
+	return (line);
 }

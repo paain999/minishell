@@ -11,9 +11,11 @@ LDFLAGS := -L$(LIB_DIR) -lft
 LIBFT := $(LIB_DIR)/libft.a
 
 PARSER_DIR := src/parser
-PARSER_SRC := $(wildcard $(PARSER_DIR)/*.c)
+UTILS_DIR := src/utils
+SRC_DIR := src/parser src/utils
+SRCS := $(foreach dir, $(SRC_DIR), $(wildcard $(dir)/*.c))
 OBJ_DIR := obj/
-OBJS := $(addprefix $(OBJ_DIR), $(notdir $(PARSER_SRC:.c=.o)))
+OBJS := $(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.o)))
 
 # COLORS
 RED    := \033[31m
@@ -22,14 +24,16 @@ YELLOW := \033[33m
 BLUE   := \033[34m
 RESET  := \033[0m
 
+vpath %.c $(SRC_DIR)
+
 .SILENT:
 all: $(OBJ_DIR) $(NAME)
 
-$(OBJ_DIR)%.o: $(PARSER_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling Libft...$(RESET)"

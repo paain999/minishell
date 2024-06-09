@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.c                                     :+:      :+:    :+:   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 15:23:18 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:50:28 by dajimene         ###   ########.fr       */
+/*   Created: 2024/05/31 20:32:32 by dajimene          #+#    #+#             */
+/*   Updated: 2024/06/07 12:29:00 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void 	ft_error_exit(char *msg)
+
+
+void	parse_line(t_minishell *minishell)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	exit(1);
+	if (minishell->line[0] == '\0')
+		return;
 }

@@ -6,67 +6,63 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:56:21 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:50:43 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:23:47 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	**get_paths(char **envp)
+void	shell_loop(t_minishell *minishell)
 {
-	char	**paths;
-	char	**env;
-	int		i;
-
-	env = envp;
-	while (*env)
+	while (!minishell->exit_status)
 	{
-		if (ft_strncmp(*env, "PATH=", 5) == 0)
+		minishell->line = readline(minishell->prompt_str);
+		if (!minishell->line)
+			ft_exit(minishell, RED "Readline failed" RST);
+		if (minishell->line)
+			add_history(minishell->line);
+		parse_line(minishell);
+		if (ft_strcmp(minishell->line, "exit") == 0)
 		{
-			*env += 5;
-			i = 0;
-			paths = ft_split(*env, ':');
-			if (!paths)
-				return (NULL);
-			while (paths[i])
-			{
-				paths[i] = ft_strjoin(paths[i], "/");
-				i++;
-			}
-			break ;
+			rl_clear_history();
+			minishell->exit_status = 1;
 		}
-		env++;
+		else
+			ft_putstr_fd(minishell->line, 2);
+		free(minishell->line);
 	}
-	if (!*env)
-		return (NULL);
-	return (paths);
 }
 
 void	init_shell(t_minishell *minishell, char **envp)
 {
-	minishell->cmds = NULL;
-	minishell->cmd_args = NULL;
+	g_exit_code = 0;
 	minishell->fd_in = 0;
 	minishell->fd_out = 1;
 	minishell->envp_cpy = ft_cpdarr(envp);
-	if (!minishell->envp_cpy)
-		ft_error_exit("Malloc failed");
-	minishell->paths = get_paths(envp);
-	if (!minishell->paths)
-		ft_error_exit("Malloc failed");
+	minishell->username = get_env_var("USER=", minishell->envp_cpy);
+	minishell->prompt_str = ft_strjoin_gnl(ft_strjoin(GREEN, minishell->username),
+			"@Minishell"WHITE":"RST BLUE"~"WHITE"$ " RST);
+	if (!minishell->prompt_str || !minishell->username
+		|| !minishell->envp_cpy)
+		ft_exit(minishell, RED "Malloc failed" RST);
+	minishell->pid = 0;
+	minishell->exit_status = 0;
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	t_minishell	*minishell;
 
+	(void)ac;
 	(void)av;
 	minishell = NULL;
 	if (!envp || !*envp)
-		ft_error_exit("No environment");
+		ft_error_exit(RED "No environment" RST);
 	if (ac > 1)
-		ft_error_exit("No arguments allowed");
-	minishell = malloc(sizeof(t_minishell));
+		ft_error_exit(RED "No arguments allowed" RST);
+	ft_secure_malloc((void **)&minishell, sizeof(t_minishell), 1);
 	init_shell(minishell, envp);
+	shell_loop(minishell);
+	free_all(minishell);
 	return (0);
 }
