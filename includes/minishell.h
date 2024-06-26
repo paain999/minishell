@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:01:11 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/07 12:23:16 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:20:31 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,51 @@
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 
-int			g_exit_code;
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
+enum					e_token_type
+{
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+};
+
+typedef struct s_token
+{
+	char				*value;
+	enum e_token_type	type;
+	struct s_token		*next;
+}						t_token;
 
 typedef struct s_minishell
 {
-	char	*line;
-	char	*prompt_str;
-	char	**cmds;
-	int		exit_status;
-	int		fd_in;
-	int		fd_out;
-	char	**envp_cpy;
-	char	*username;
-	pid_t	pid;
-}			t_minishell;
+	char				*line;
+	char				*prompt_str;
+	t_token				*tokens;
+	char				quote_type;
+	int					exit_status;
+	int					fd_in;
+	int					fd_out;
+	char				**envp_cpy;
+	char				*username;
+	pid_t				pid;
+}						t_minishell;
 
-void		ft_error_exit(char *msg);
-char		**ft_cpy_arr(char **arr);
-void		ft_exit(t_minishell *minishell, char *msg);
-char		**get_paths(char **envp);
-char		*get_env_var(char *var, char **envp);
-void		free_all(t_minishell *minishell);
-void		ft_secure_malloc(void **ptr, size_t size, size_t num);
-void		parse_line(t_minishell *minishell);
+// FREE AND EXIT FUNCTIONS
+void					ft_error_exit(char *msg);
+void					ft_exit(t_minishell *minishell, char *msg);
+void					free_all(t_minishell *minishell);
+void					free_tokens(t_token **tokens);
+
+char					**get_paths(char **envp);
+char					*get_env_var(char *var, char **envp);
+
+void					tokenize(t_minishell *minishell);
+t_token					*create_token(char *value);
+void					add_token(t_token **tokens, t_token *new_token);
+int						is_space(char c);
 
 #endif

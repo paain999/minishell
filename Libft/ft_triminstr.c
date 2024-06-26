@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_triminstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajimene <dajimene@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 14:33:14 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/19 18:13:01 by dajimene         ###   ########.fr       */
+/*   Created: 2024/06/19 18:12:31 by dajimene          #+#    #+#             */
+/*   Updated: 2024/06/19 18:12:54 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ static	char	*ft_cpy(int len, int i, char *new, char const *s1)
 	while (i < len)
 			new[k++] = s1[i++];
 	new[k] = '\0';
+	free((char *)s1);
 	return (new);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_triminstr(char const *s1, char const *set)
 {
 	int		len;
 	int		i;

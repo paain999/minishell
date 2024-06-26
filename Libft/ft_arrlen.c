@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_line.c                                       :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 20:32:32 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/07 12:29:00 by dajimene         ###   ########.fr       */
+/*   Created: 2024/06/11 13:31:03 by dajimene          #+#    #+#             */
+/*   Updated: 2024/06/11 13:31:11 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-
-
-void	parse_line(t_minishell *minishell)
+int	ft_arrlen(void **arr)
 {
-	if (minishell->line[0] == '\0')
-		return;
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

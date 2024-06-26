@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:02:58 by dajimene          #+#    #+#             */
-/*   Updated: 2024/05/29 23:48:40 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:14:35 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ size_t	ft_strlcat(char *dest, const char *scr, size_t destsize);
 char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 int		ft_strcmp(const char *str1, const char *str2);
+char	*ft_triminstr(char const *s1, char const *set);
 
 // PRINT
 void	ft_putchar_fd(char c, int fd);
@@ -90,4 +91,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2);
 // ARRAY MANIPULATION
 
 char	**ft_cpdarr(char **arr);
+void	ft_arrpush(void ***arr, void *new_element);
+int		ft_arrlen(void **arr);
+
 #endif
