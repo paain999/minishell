@@ -6,12 +6,16 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:17:33 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/26 18:15:40 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:55:38 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	is_space(char c)
+{
+	return (c == ' ' || c == '\t');
+}
 
 static void	handle_quotes(t_minishell *minishell, char **start, char **line)
 {
@@ -77,6 +81,7 @@ void	tokenize(t_minishell *minishell)
 		else
 			line++;
 	}
+	remove_quotes(minishell);
 	tmp = minishell->tokens;
 	while (tmp)
 	{

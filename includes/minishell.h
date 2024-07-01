@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 13:01:11 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/25 14:20:31 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:55:47 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ char					*get_env_var(char *var, char **envp);
 void					tokenize(t_minishell *minishell);
 t_token					*create_token(char *value);
 void					add_token(t_token **tokens, t_token *new_token);
-int						is_space(char c);
+void					remove_quotes(t_minishell *minishell);
 
 #endif
