@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:17:33 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/25 14:20:12 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:15:40 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	handle_quotes(t_minishell *minishell, char **start, char **line)
 			(*line)++;
 		new_token = create_token(ft_substr(*start, 0, *line - *start));
 		add_token(&minishell->tokens, new_token);
-		(*line)++;
 	}
 }
 

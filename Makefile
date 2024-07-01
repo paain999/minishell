@@ -40,13 +40,11 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIB_DIR) --no-print-directory
 	@echo "$(GREEN)Libft compiled!$(RESET)"
 	@echo "$(BLUE)Compiling minishell...$(RESET)"
-	@sleep 1
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LDFLAGS) -lreadline -o $(NAME)
 	@echo "$(GREEN)Minishell compiled!$(RESET)"
 
 clean:
 	@echo "$(YELLOW)Cleaning...$(RESET)"
-	@sleep 1
 	@$(RM) $(OBJS)
 	@$(RM_DIR) $(OBJ_DIR)
 	@$(MAKE) -C $(LIB_DIR) clean --no-print-directory

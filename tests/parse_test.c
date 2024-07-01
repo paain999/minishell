@@ -88,7 +88,6 @@ static void handle_quotes(char **start, char **str, t_token **tokens)
 			(*str)++;
 		new_token = create_token(ft_substr(*start, 0, *str - *start));
 		add_token(tokens, new_token);
-		(*str)++;
 	}
 }
 
@@ -151,7 +150,7 @@ int	main(void)
 
 	tokens = NULL;
 	tmp = NULL;
-	line = ft_strdup("ech\"o hel\"lo \'world\'");
+	line = ft_strdup("e\"cho\" 'ho\"la\"'");
 	tokens = tokenize(line, tokens);
 	tmp = tokens;
 	while (tmp)

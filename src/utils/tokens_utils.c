@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:39:01 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/25 20:41:19 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:36:57 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,48 +46,38 @@ void	add_token(t_token **tokens, t_token *new_token)
 	}
 }
 
-static void	handle_quotes(t_minishell **minishell)
+static int get_len(char *str)
 {
-	int i;
-	int len;
+	int	len;
+	char quote;
 
-	i = -1;
-	while ((*minishell)->tokens->value[i])
+	len = 0;
+	while (*str)
 	{
-		if ((*minishell)->tokens->value[i] == '"' || (*minishell)->tokens->value[i] == '\'')
+		if (*str != '"' && *str != '\'')
+			len++;
+		else
 		{
-			(*minishell)->quote_type = (*minishell)->tokens->value[i];
-			i++;
-			while ((*minishell)->tokens->value[i] && (*minishell)->tokens->value[i] != (*minishell)->quote_type)
+			quote = *str;
+			str++;
+			while (*str && *str != quote)
 			{
-				i++;
 				len++;
+				str++;
 			}
 		}
-		else
-			i++;
+		str++;
 	}
+	return (len);
 }
 
 void	remove_quotes(t_minishell *minishell)
 {
-	t_token *first;
-	char	*quote;
+	t_token *tmp;
 
-	first = minishell->tokens;
-	while (minishell->tokens)
-	{
-		if (minishell->tokens->value[0] == '"' || minishell->tokens->value[0] == '\'')
-		{
-			quote[0] = minishell->tokens->value[0];
-			minishell->tokens->value = ft_triminstr(minishell->tokens->value, quote);
-			if (!minishell->tokens->value)
-				ft_error_exit("Malloc failed");
-		}
-		else
-		{
-			handle_quotes(&minishell);
-			minishell->tokens = minishell->tokens->next;
-		}
+	tmp = minishell->tokens;
+	while (tmp)
+	{ 
+		tmp = tmp->next;
 	}
 }
