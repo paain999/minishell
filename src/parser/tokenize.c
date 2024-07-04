@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 13:17:33 by dajimene          #+#    #+#             */
-/*   Updated: 2024/07/01 19:55:38 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/02 13:00:59 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ void	tokenize(t_minishell *minishell)
 			handle_words(minishell, &start, &line);
 		else
 			line++;
+	}
+	tmp = minishell->tokens;
+	while (tmp)
+	{
+		printf("Token: %s\n", tmp->value);
+		tmp = tmp->next;
 	}
 	remove_quotes(minishell);
 	tmp = minishell->tokens;

@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:39:01 by dajimene          #+#    #+#             */
-/*   Updated: 2024/07/01 19:57:13 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:59:42 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ static int get_len(char *str)
 	return (len);
 }
 
-static char *create_new_value(char *str, char quote)
+static char *create_new_value(const char *str, char *quote)
 {
 	char	*new_value;
 	int		len;
 
-	len = get_len(str);
+	len = get_len((char *)str);
 	new_value = malloc(sizeof(char) * (len + 1));
 	if (!new_value)
 		ft_error_exit("Malloc failed");
@@ -82,18 +82,17 @@ static char *create_new_value(char *str, char quote)
 			new_value[len++] = *str;
 		else
 		{
-			quote = *str;
+			*quote = *str;
 			str++;
-			while (*str && *str != quote)
+			while (*str && *str != *quote)
 			{
 				new_value[len++] = *str;
 				str++;
 			}
 		}
-		str++;
+		str += (*str != '\0');
 	}
 	new_value[len] = '\0';
-	free(str);
 	return (new_value);
 }
 
@@ -101,12 +100,15 @@ void	remove_quotes(t_minishell *minishell)
 {
 	t_token *tmp;
 	char quote;
+	char *new_value;
 
 	tmp = minishell->tokens;
 	quote = 0;
 	while (tmp)
 	{
-		tmp->value = create_new_value(tmp->value, quote);
+		new_value = create_new_value(tmp->value, &quote);
+		free(tmp->value);
+		tmp->value = new_value;
 		tmp = tmp->next;
 	}
 }
