@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_utils.c                                     :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:23:18 by dajimene          #+#    #+#             */
-/*   Updated: 2024/06/24 14:12:58 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:03:52 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_error_exit(char *msg)
+void	free_ptr(void *ptr)
 {
-	ft_putstr_fd("Error: ", STDERR);
-	ft_putstr_fd(msg, STDERR);
-	ft_putstr_fd("\n", STDERR);
-	exit(1);
+	if (ptr != NULL)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }
 
 static void	free_arr(char **arr)
@@ -49,21 +50,17 @@ void	free_tokens(t_token **tokens)
 
 void	free_all(t_minishell *minishell)
 {
-	if (!minishell)
-		return ;
-	if (minishell->envp_cpy)
-		free_arr(minishell->envp_cpy);
-	if (minishell->prompt_str)
-		free(minishell->prompt_str);
-	if (minishell->username)
-		free(minishell->username);
-	if (minishell->tokens)
-		free_tokens(&minishell->tokens);
+	if (minishell)
+	{
+		if (minishell->user_prompt)
+			free_ptr(minishell->user_prompt);
+		if (minishell->wdir)
+			free_ptr(minishell->wdir);
+		if (minishell->oldpwd)
+			free_ptr(minishell->oldpwd);
+		if (minishell->envp_cpy)
+			free_arr(minishell->envp_cpy);
+		rl_clear_history();	
+	}
 }
 
-void	ft_exit(t_minishell *minishell, char *msg)
-{
-	free_all(minishell);
-	if (msg)
-		ft_error_exit(msg);
-}
