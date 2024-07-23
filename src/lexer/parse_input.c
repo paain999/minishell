@@ -6,7 +6,7 @@
 /*   By: dajimene <dajimene@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:11:30 by dajimene          #+#    #+#             */
-/*   Updated: 2024/07/18 10:54:49 by dajimene         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:06:56 by dajimene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,11 @@ int	parse_input(t_minishell *minishell)
 	if (tokenize(minishell) == 1)
 		return (0);
 	if (minishell->token->type == END)
+		return (0);
+	if (check_vars(&minishell->token) == 1)
+		return (false);
+	ft_expand(minishell, minsihell->token);
+	handle_quotes(minishell);
+	create_cmd(minishell, minishell->token);
 	return (1);
 }
